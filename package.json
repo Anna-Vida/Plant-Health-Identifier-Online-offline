@@ -1,0 +1,28 @@
+{
+  "name": "plant-health",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "expo": "^50.0.0",
+    "expo-file-system": "~16.0.9",
+    "expo-image-picker": "~15.0.7",
+    "expo-secure-store": "~13.0.2",
+    "react": "18.2.0",
+    "react-native": "0.74.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@expo/cli": "^55.0.16",
+    "@types/react": "~18.2.45",
+    "@types/react-native": "~0.73.0",
+    "typescript": "^5.3.3"
+  }
+}
