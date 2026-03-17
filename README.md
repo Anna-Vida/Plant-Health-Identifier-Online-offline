@@ -2,10 +2,10 @@
 
 An AI-powered web app that identifies plants and diagnoses health issues using Google Gemini 2.5. Simply upload a photo or use your camera to get an instant plant analysis.
 
-[Powered by Gemini 2.5](https://gemini.google.com)
-[HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
-[CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3)
-[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Powered by Gemini 2.5](https://img.shields.io/badge/Gemini_2.5-4A89F3?style=for-the-badge&logo=google-gemini&logoColor=white)](https://gemini.google.com)
+[![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
+[![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
 ## Features
 
