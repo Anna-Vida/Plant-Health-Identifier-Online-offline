@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PlantScan AI — Plant Health Identifier</title>
+    <meta
+      name="description"
+      content="Identify plant species and diagnose health issues instantly using AI-powered image analysis with Google Gemini 2.5."
+    />
+    <meta
+      name="keywords"
+      content="plant identifier, plant health, plant disease, AI plant scanner, Gemini AI"
+    />
+    <meta
+      property="og:title"
+      content="PlantScan AI — Plant Health Identifier"
+    />
+    <meta
+      property="og:description"
+      content="Scan any plant to identify its species and diagnose health problems instantly."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- API Key Modal -->
+    <div id="apiKeyModal" class="modal-overlay hidden">
+      <div class="modal-card">
+        <div class="modal-icon">🔑</div>
+        <h2>Gemini API Key Required</h2>
+        <p>
+          Enter your Google Gemini API key to power the plant scanner. Your key
+          is stored securely in your browser only.
+        </p>
+        <div class="input-group">
+          <input
+            type="password"
+            id="apiKeyInput"
+            placeholder="AIza..."
+            autocomplete="off"
+          />
+          <button id="toggleKey" class="icon-btn" title="Show/Hide Key">
+            👁
+          </button>
+        </div>
+        <a
+          href="https://aistudio.google.com/apikey"
+          target="_blank"
+          class="link-small"
+          >Get a free API key →</a
+        >
+        <button id="saveApiKey" class="btn-primary">Save & Continue</button>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">🌿</span>
+          <span class="logo-text"
+            >PlantScan <span class="logo-ai">AI</span></span
+          >
+        </div>
+        <nav class="nav-actions">
+          <button id="changeKeyBtn" class="btn-ghost" title="Change API Key">
+            ⚙ API Key
+          </button>
+          <button id="historyToggleBtn" class="btn-ghost" id="historyBtn">
+            🕐 History
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Layout -->
+    <main class="main-layout">
+      <!-- Sidebar: History -->
+      <aside class="history-sidebar" id="historySidebar">
+        <div class="sidebar-header">
+          <h3>Recent Scans</h3>
+          <button id="closeSidebar" class="icon-btn">✕</button>
+        </div>
+        <div id="historyList" class="history-list">
+          <p class="empty-state">No scans yet. Scan your first plant!</p>
+        </div>
+        <button id="clearHistoryBtn" class="btn-ghost btn-danger">
+          🗑 Clear History
+        </button>
+      </aside>
+
+      <!-- Center: Scanner -->
+      <section class="scanner-section">
+        <!-- Hero -->
+        <div class="hero">
+          <div class="hero-badge">Powered by Gemini 2.5</div>
+          <h1 class="hero-title">
+            Identify & Diagnose<br /><span class="gradient-text"
+              >Any Plant Instantly</span
+            >
+          </h1>
+          <p class="hero-sub">
+            Upload a photo or use your camera to get AI-powered plant
+            identification and health analysis in seconds.
+          </p>
+        </div>
+
+        <!-- Upload / Camera Area -->
+        <div class="scan-card" id="scanCard">
+          <!-- Drop Zone -->
+          <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-inner" id="dropZoneInner">
+              <div class="scan-icon-wrap">
+                <div class="scan-ring"></div>
+                <span class="scan-icon">🌱</span>
+              </div>
+              <p class="drop-label">Drag & drop a plant image here</p>
+              <p class="drop-sub">or choose an option below</p>
+            </div>
+            <!-- Preview image -->
+            <img
+              id="previewImg"
+              class="preview-img hidden"
+              alt="Plant preview"
+            />
+            <!-- Camera viewfinder -->
+            <div id="cameraViewfinder" class="camera-viewfinder hidden">
+              <video id="cameraFeed" autoplay playsinline muted></video>
+              <div class="viewfinder-frame"></div>
+              <button id="captureBtn" class="capture-btn">📸 Capture</button>
+              <button id="cancelCameraBtn" class="btn-ghost camera-cancel-btn">
+                ✕ Cancel
+              </button>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <label for="fileInput" class="btn-action" id="uploadBtn">
+              <span>📁</span> Upload Image
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                class="hidden"
+              />
+            </label>
+            <button class="btn-action" id="cameraBtn">
+              <span>📷</span> Use Camera
+            </button>
+            <button class="btn-primary btn-scan" id="analyzeBtn" disabled>
+              <span id="analyzeBtnIcon">🔍</span>
+              <span id="analyzeBtnText">Analyze Plant</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-card hidden" id="loadingCard">
+          <div class="loading-spinner"></div>
+          <p class="loading-text">Analyzing your plant...</p>
+          <p class="loading-sub">Gemini AI is examining the image</p>
+          <div class="loading-steps">
+            <div class="step active" id="step1">🔍 Identifying species</div>
+            <div class="step" id="step2">🩺 Diagnosing health</div>
+            <div class="step" id="step3">💡 Generating care tips</div>
+          </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="results-panel hidden" id="resultsPanel">
+          <!-- Plant Identity Card -->
+          <div class="result-card identity-card">
+            <div class="result-header">
+              <div>
+                <h2 id="plantName" class="plant-name">—</h2>
+                <p id="commonName" class="common-name">Common name</p>
+              </div>
+              <div id="healthBadge" class="health-badge">—</div>
+            </div>
+            <div class="health-bar-wrap">
+              <div class="health-bar-label">
+                <span>Health Score</span>
+                <span id="healthScoreNum">0/100</span>
+              </div>
+              <div class="health-bar-track">
+                <div class="health-bar-fill" id="healthBarFill"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Issues Card -->
+          <div class="result-card issues-card" id="issuesCard">
+            <h3 class="card-title">⚠️ Detected Issues</h3>
+            <ul id="issuesList" class="issues-list"></ul>
+          </div>
+
+          <!-- Care Tips Card -->
+          <div class="result-card care-card">
+            <h3 class="card-title">💧 Care Recommendations</h3>
+            <ul id="careList" class="care-list"></ul>
+          </div>
+
+          <!-- Fun Fact Card -->
+          <div class="result-card fact-card" id="factCard">
+            <h3 class="card-title">🌟 Fun Fact</h3>
+            <p id="funFact" class="fun-fact-text"></p>
+          </div>
+
+          <!-- Scan Again -->
+          <button class="btn-primary btn-scan-again" id="scanAgainBtn">
+            🔄 Scan Another Plant
+          </button>
+        </div>
+
+        <!-- Error Card -->
+        <div class="error-card hidden" id="errorCard">
+          <div class="error-icon">⚠️</div>
+          <h3 id="errorTitle">Something went wrong</h3>
+          <p id="errorMsg"></p>
+          <button class="btn-primary" id="retryBtn">Try Again</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        Built with 💚 using <strong>Google Gemini 2.5</strong> · PlantScan AI
+      </p>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
