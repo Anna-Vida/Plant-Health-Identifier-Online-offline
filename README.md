@@ -1,48 +1,22 @@
-# Plant Health Identifier (Expo, Gemini)
+# PlantScan AI — Plant Health Identifier
 
-Identify plant species and diagnose common leaf diseases using the Gemini Vision API. Includes an offline mode scaffold for local matching based on curated datasets.
+An AI-powered web app that identifies plants and diagnoses health issues using Google Gemini 2.5. Simply upload a photo or use your camera to get an instant plant analysis.
+
+[Powered by Gemini 2.5](https://gemini.google.com)
+[HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
+[CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3)
+[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 ## Features
-- Pick or capture images with Expo Image Picker
-- Securely store Gemini API key with SecureStore
-- Send base64 images to gemini-1.5-flash for analysis
-- Toggle Offline mode to prepare for on-device matching
 
-## Requirements
-- Node.js 18+
-- Expo Go app on your iOS/Android device
-- A Google Generative Language API key (Gemini)
+-   **Live Camera Scanner** — captures plant images directly from your webcam or phone camera
+-   **Image Upload** — drag & drop or browse to upload any plant photo
+-   **Gemini 2.5 AI Analysis** — identifies species and diagnoses health conditions
+-   **Health Score** — visual health bar rated 0–100 (Healthy / Moderate / Critical)
+-   **Issue Detection** — lists specific diseases, pests, or stress symptoms
+-   **Care Recommendations** — actionable tips tailored to your plant’s condition
+-   **Fun Facts** — learn something new about each plant
+-   **Scan History** — last 8 scans stored locally in your browser
+-   **Premium Dark UI** — glassmorphism design with smooth animations
 
-## Setup
-1. Install dependencies:
-   - `npm install`
-2. Start development server:
-   - `npx expo start`
-3. Open Expo Go and scan the QR code.
-
-## Usage
-1. Enter your Gemini API key in the input field and Save Key.
-2. Tap Pick Image or Take Photo to select a plant image.
-3. Tap Analyze with Gemini to get species, diagnosis, and care steps.
-4. Toggle Offline mode to disable cloud requests and show offline plan.
-
-## Offline Mode Plan
-- Use a small curated subset of PlantVillage or PlantDoc for target crops.
-- Precompute image embeddings server-side (e.g., MobileNet/EfficientNet) and ship vectors + labels as JSON.
-- Perform on-device k-nearest neighbor lookup against precomputed vectors.
-- For real-time on-device embeddings, migrate to Expo Dev Client with tfjs-react-native.
-
-Dataset references:
-- PlantVillage (leaf disease classification): https://www.kaggle.com/datasets/emmarex/plantdisease
-- PlantDoc (in-the-wild images): https://github.com/pratikkayal/PlantDoc-Dataset
-- PlantCLEF (broader identification): https://www.imageclef.org/lifeclef
-
-## Project Structure
-- `src/App.tsx` — main UI and Gemini request
-- `app.json` — Expo configuration
-- `index.js` — entry point
-- `tsconfig.json`, `babel.config.js` — tooling config
-
-## Notes
-- Do not commit API keys; keys are stored on-device via SecureStore.
-- Web output was disabled to avoid expo-router requirement; use Expo Go for testing.
+## Getting Started
