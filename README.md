@@ -67,16 +67,6 @@ Plant/
 - Plant images are sent **only to Google's Gemini API** for analysis
 - No data is stored on any server — everything is local
 
-## 🛠 Tech Stack
-
-| Technology         | Purpose                                    |
-| ------------------ | ------------------------------------------ |
-| HTML5              | App structure                              |
-| CSS3               | Dark glassmorphism UI, animations          |
-| Vanilla JavaScript | App logic, Gemini API calls                |
-| Google Gemini 2.5  | AI plant identification & health diagnosis |
-| MediaDevices API   | Live camera capture                        |
-| localStorage       | API key & history persistence              |
 
 ## 🤖 AI Model
 
