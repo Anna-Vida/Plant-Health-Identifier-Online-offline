@@ -9,14 +9,32 @@ An AI-powered web app that identifies plants and diagnoses health issues using G
 
 ## Features
 
--   **Live Camera Scanner** — captures plant images directly from your webcam or phone camera
--   **Image Upload** — drag & drop or browse to upload any plant photo
--   **Gemini 2.5 AI Analysis** — identifies species and diagnoses health conditions
--   **Health Score** — visual health bar rated 0–100 (Healthy / Moderate / Critical)
--   **Issue Detection** — lists specific diseases, pests, or stress symptoms
--   **Care Recommendations** — actionable tips tailored to your plant’s condition
--   **Fun Facts** — learn something new about each plant
--   **Scan History** — last 8 scans stored locally in your browser
--   **Premium Dark UI** — glassmorphism design with smooth animations
+- **Live Camera Scanner** — captures plant images directly from your webcam or phone camera
+- **Image Upload** — drag & drop or browse to upload any plant photo
+- **Gemini 2.5 AI Analysis** — identifies species and diagnoses health conditions
+- **Health Score** — visual health bar rated 0–100 (Healthy / Moderate / Critical)
+- **Issue Detection** — lists specific diseases, pests, or stress symptoms
+- **Care Recommendations** — actionable tips tailored to your plant’s condition
+- **Fun Facts** — learn something new about each plant
+- **Scan History** — last 8 scans stored locally in your browser
+- **Premium Dark UI** — glassmorphism design with smooth animations
 
 ## Getting Started
+
+1. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+2. Create your local env file
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Start the app
+
+   ```bash
+   npx expo start
+   ```
