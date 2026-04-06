@@ -1,31 +1,69 @@
 {
   "expo": {
-    "name": "Plant Health",
-    "slug": "plant-health",
-    "scheme": "planthealth",
-    "version": "0.0.1",
+    "name": "Plant Disease Identification Tool",
+    "slug": "plant-disease-identification-tool",
+    "version": "1.0.0",
     "orientation": "portrait",
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": ["**/*"],
+    "icon": "./assets/images/logo.png",
+    "scheme": "leaflab",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.annap.leaflab",
+      "buildNumber": "1.0.0",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Plant Disease Identification Tool uses the camera to scan crop disease symptoms.",
+        "NSPhotoLibraryUsageDescription": "Plant Disease Identification Tool uses your photo library so you can upload crop photos for disease checking."
+      }
     },
     "android": {
-      "adaptiveIcon": {}
+      "package": "com.annap.leaflab",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#F3F0E7",
+        "foregroundImage": "./assets/images/logo.png",
+        "monochromeImage": "./assets/images/logo.png"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/logo.png"
     },
     "plugins": [
       [
         "expo-image-picker",
         {
-          "photosPermission": "Allow access to photos to identify plant health"
+          "photosPermission": "Plant Disease Identification Tool uses your photos so you can upload crop images for disease checking.",
+          "cameraPermission": "Plant Disease Identification Tool uses the camera so you can scan crop symptoms in the field."
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/logo.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#F3F0E7",
+          "dark": {
+            "backgroundColor": "#F3F0E7"
+          }
         }
       ]
     ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
     "extra": {
+      "router": {},
       "eas": {
-        "projectId": "00000000-0000-0000-0000-000000000000"
+        "projectId": "5ce46a4a-ca61-472a-aaab-77197576763d"
       }
     }
   }

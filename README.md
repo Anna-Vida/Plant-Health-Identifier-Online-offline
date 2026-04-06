@@ -1,40 +1,68 @@
-# PlantScan AI — Plant Health Identifier
+# Plant Disease Identification Tool
 
-An AI-powered web app that identifies plants and diagnoses health issues using Google Gemini 2.5. Simply upload a photo or use your camera to get an instant plant analysis.
+Plant Disease Identification Tool is an Expo app for farmers and growers to scan crops, upload field photos, and estimate likely disease pressure, spread risk, and first-response actions.
 
-[![Powered by Gemini 2.5](https://img.shields.io/badge/Gemini_2.5-4A89F3?style=for-the-badge&logo=google-gemini&logoColor=white)](https://gemini.google.com)
-[![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
-[![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+## Setup
 
-## Features
-
-- **Live Camera Scanner** — captures plant images directly from your webcam or phone camera
-- **Image Upload** — drag & drop or browse to upload any plant photo
-- **Gemini 2.5 AI Analysis** — identifies species and diagnoses health conditions
-- **Health Score** — visual health bar rated 0–100 (Healthy / Moderate / Critical)
-- **Issue Detection** — lists specific diseases, pests, or stress symptoms
-- **Care Recommendations** — actionable tips tailored to your plant’s condition
-- **Fun Facts** — learn something new about each plant
-- **Scan History** — last 8 scans stored locally in your browser
-- **Premium Dark UI** — glassmorphism design with smooth animations
-
-## Getting Started
-
-1. Install dependencies
-
+1. Install dependencies.
    ```bash
    npm install
    ```
-
-2. Create your local env file
-
+2. Create your local env file.
    ```bash
    cp .env.example .env
    ```
-
-3. Start the app
-
+3. Add your key to `.env`.
    ```bash
-   npx expo start
+   EXPO_PUBLIC_GEMINI_API_KEY=your_api_key_here
    ```
+4. Start the app.
+   ```bash
+   npm start
+   ```
+
+## Scan the codebase (app flow report)
+
+Generate a local Markdown report (`flow-report.md`) that summarizes screens, navigation, and the main scanner flow. If you provide a Gemini key, it also adds an AI-assisted architecture/flow analysis.
+
+```bash
+npm run scan:flow
+```
+
+Recommended env vars (keep secrets out of git):
+
+- `GEMINI_API_KEY` (preferred for the code scanner script)
+- `GEMINI_MODEL` (optional, defaults to `gemini-2.0-flash`)
+
+## Expo Go
+
+- This app is Expo Go compatible because it only uses Expo SDK modules already supported in Expo Go, including `expo-image-picker`.
+- For local testing in Expo Go, keep your Gemini key in `.env` as `EXPO_PUBLIC_GEMINI_API_KEY=...`.
+- If you change the `.env` value while Metro is running, do a full reload in Expo Go to pick up the new value.
+
+## EAS Build
+
+- `eas.json` is included with `development`, `preview`, and `production` profiles.
+- For cloud builds, set `EXPO_PUBLIC_GEMINI_API_KEY` in EAS for the matching environment instead of relying on a local `.env` file.
+- Suggested commands:
+  ```bash
+  eas build --profile preview --platform android
+  eas build --profile production --platform android
+  eas build --profile production --platform ios
+  ```
+- The current app identifiers are:
+  - Android: `com.annap.leaflab`
+  - iOS: `com.annap.leaflab`
+- Change those before store release if you want a different package or bundle ID.
+
+## Features
+
+- Camera and gallery image capture with `expo-image-picker`
+- Gemini-powered plant identification and health analysis
+- Structured output with urgency, likely issue, care steps, and prevention tips
+- Built-in guide screen for better photo capture and symptom interpretation
+
+## Notes
+
+- The current implementation sends requests directly from the client. That is acceptable for a prototype, but a production release should proxy AI requests through your own backend.
+- Diagnosis from an image is not a substitute for lab testing or expert confirmation.
